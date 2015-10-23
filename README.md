@@ -5,6 +5,7 @@ Tested against:
 
 * slf4j-simple 1.7.12
 * slf4j-simple 1.6.6
+* Logback 1.0.1
 
 Should not pollute the local maven repository.
 

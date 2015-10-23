@@ -40,18 +40,18 @@ public class LambdaLoggingTest {
     @Test
     public void testError() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream(4096);
-        synchronized (System.err) {
-            final PrintStream stderr = System.err;
+        synchronized (System.out) {
+            final PrintStream stdout = System.out;
             try {
-                System.setErr(new PrintStream(out, true, "US-ASCII"));
+                System.setOut(new PrintStream(out, true, "US-ASCII"));
                 Logger logger = LoggerFactory.getLogger(LambdaLoggingTest.class);
-                System.out.println(logger);
                 logger.error("one {} two {} three {}", () -> new Object[]{"uno", "dos", "tres"});
+                System.out.flush();
                 String result = new String(out.toByteArray(), US_ASCII);
+                result = result.contains(" one ") ? result.substring(result.indexOf("one ")).trim() : result;
                 assertEquals("one uno two dos three tres", result);
-                System.out.println(result);
             } finally {
-                System.setErr(stderr);
+                System.setOut(stdout);
             }
         }
     }
