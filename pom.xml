@@ -105,7 +105,7 @@
       </dependency>
       <dependency>
         <groupId>com.inco5.slf4j</groupId>
-        <artifactId>slf4j-compatibility-test</artifactId>
+        <artifactId>slf4j-compatibility-suite</artifactId>
         <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
