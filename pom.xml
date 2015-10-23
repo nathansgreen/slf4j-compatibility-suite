@@ -29,11 +29,14 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j-simple-17.version>1.7.12</slf4j-simple-17.version>
+    <slf4j-simple-16.version>1.6.6</slf4j-simple-16.version>
   </properties>
 
   <modules>
     <module>tests</module>
     <module>it</module>
+    <module>retrolambda</module>
   </modules>
 
   <build>
@@ -138,11 +141,6 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <type>test-jar</type>
     </dependency>
   </dependencies>
 </project>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.inco5.slf4j</groupId>
+    <artifactId>slf4j-compatibility-suite</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>retrolambda</artifactId>
+  <packaging>jar</packaging>
+  <name>SLF4J Compatibility Unit Tests</name>
+
+  <description>
+    Test use of Retrolambda on consumers of SLF4J 1.8 API
+  </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**org/slf4j/NoBindingTest**</exclude>
+            <exclude>**org/slf4j/helpers/**</exclude>
+            <exclude>junit/framework/**</exclude>
+            <exclude>junit/extensions/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>tree</id>
+            <goals>
+              <goal>tree</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+          <execution>
+            <id>unpack-dependencies</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>net.orfjackal.retrolambda</groupId>
+        <artifactId>retrolambda-maven-plugin</artifactId>
+        <version>2.0.6</version>
+        <configuration>
+          <defaultMethods>true</defaultMethods>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>process-main</goal>
+              <goal>process-test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j-simple-17.version}</version>
+    </dependency>
+  </dependencies>
+</project>
