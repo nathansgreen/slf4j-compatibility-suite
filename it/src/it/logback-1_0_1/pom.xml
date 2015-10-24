@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.inco5.slf4j</groupId>
-    <artifactId>it</artifactId>
+    <artifactId>slf4j-compatibility-suite</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <groupId>com.inco5.slf4j.it</groupId>
-  <artifactId>slf4j-simple-16</artifactId>
+  <artifactId>slf4j-logback-1_0_1</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -25,11 +25,13 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <version>1.8.0-SNAPSHOT</version>
       <type>test-jar</type>
     </dependency>
     <dependency>
       <groupId>com.inco5.slf4j</groupId>
       <artifactId>tests</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
