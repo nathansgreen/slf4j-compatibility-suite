@@ -19,18 +19,26 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <skip>false</skip>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <excludes>
-            <exclude>**org/slf4j/NoBindingTest**</exclude>
-            <exclude>**org/slf4j/helpers/**</exclude>
-            <exclude>junit/framework/**</exclude>
-            <exclude>junit/extensions/**</exclude>
+            <exclude>org/slf4j/NoBindingTest**</exclude>
+            <exclude>org/slf4j/helpers/**</exclude>
+            <exclude>junit/**</exclude>
           </excludes>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+        </configuration>
         <executions>
           <execution>
             <id>tree</id>
@@ -44,8 +52,21 @@
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
+          </execution>
+          <execution>
+            <id>unpack-logger-impl</id>
+            <!-- due to unpacking, logger will appear on classpath twice if it is a normal dependency -->
+            <goals>
+              <goal>unpack</goal>
+            </goals>
             <configuration>
-              <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-simple</artifactId>
+                  <version>${slf4j-simple-17.version}</version>
+                </artifactItem>
+              </artifactItems>
             </configuration>
           </execution>
         </executions>
@@ -68,12 +89,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j-simple-17.version}</version>
-    </dependency>
-  </dependencies>
 </project>

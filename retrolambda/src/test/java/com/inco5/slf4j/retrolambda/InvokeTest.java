@@ -1,5 +1,6 @@
 package com.inco5.slf4j.retrolambda;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -24,16 +25,31 @@ public class InvokeTest {
     }
 
     @Test
-    public void testErr() {
+    public void testOneArg() {
         Logger logger = LoggerFactory.getLogger(InvokeTest.class);
-        logger.error("{}", () -> name);
-        logger.error("{}/{}", name, () -> name);
-        logger.error("{}/{}", ()-> name, () -> name);
-        logger.error("{}/{}/{}", ()-> name, () -> name, () -> name);
-        logger.error("{}/{}/{}", ()-> name, () -> name, null);
-        logger.error("{}", () -> {
+        logger.warn("{}", () -> name);
+    }
+
+    @Test
+    public void testTwoArg() {
+        Logger logger = LoggerFactory.getLogger(InvokeTest.class);
+        logger.warn("{}/{}", name, () -> name);
+        logger.warn("{}/{}", ()-> name, () -> name);
+    }
+
+    @Test
+    public void testNArg() {
+        Logger logger = LoggerFactory.getLogger(InvokeTest.class);
+        logger.warn("{}/{}/{}", ()-> name, () -> name, () -> name);
+        logger.warn("{}/{}/{}", ()-> name, () -> name, null);
+    }
+
+    @Test
+    @Ignore("currently allowing lambdas to blow up default implementation")
+    public void testThrow() {
+        Logger logger = LoggerFactory.getLogger(InvokeTest.class);
+        logger.warn("{}", () -> {
             throw new AssertionError("uncaught exception in lambda");
         });
     }
-
 }
