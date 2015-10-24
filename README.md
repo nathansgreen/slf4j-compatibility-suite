@@ -34,4 +34,7 @@ Lambdas that throw exceptions are the major source of (potential) runtime
 incompatibility. If the process of evaluating the lambdas does not catch
 exceptions (similar to what is done in `org.slf4j.helpers.MessageFormatter`)
 then logging operations can fail. Whether this is ultimately allowed will be
-a design choice agreed upon by the project lead(s).Comap
+a design choice agreed upon by the project lead(s). The best option is
+probably to be completely safe and allow implementers of the API to override
+the default behavior to be more inline with their own style and performance
+goals.
