@@ -10,7 +10,7 @@
   </parent>
   <artifactId>retrolambda</artifactId>
   <packaging>jar</packaging>
-  <name>SLF4J Compatibility Unit Tests</name>
+  <name>SLF4J Retrolambda Tests</name>
 
   <description>
     Test use of Retrolambda on consumers of SLF4J 1.8 API

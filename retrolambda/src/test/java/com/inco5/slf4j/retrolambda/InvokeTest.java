@@ -45,7 +45,7 @@ public class InvokeTest {
     }
 
     @Test
-    @Ignore("currently allowing lambdas to blow up default implementation")
+    // @Ignore("currently allowing lambdas to blow up default implementation")
     public void testThrow() {
         Logger logger = LoggerFactory.getLogger(InvokeTest.class);
         logger.warn("{}", () -> {
