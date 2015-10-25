@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.inco5.slf4j</groupId>
+  <groupId>com.inco5.slf4j.it</groupId>
   <artifactId>slf4j-compatibility-suite</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -29,12 +29,15 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j.version>1.8.0-SNAPSHOT</slf4j.version>
     <slf4j-simple-17.version>1.7.12</slf4j-simple-17.version>
     <slf4j-simple-16.version>1.6.6</slf4j-simple-16.version>
+    <it-repo-directory>${project.basedir}/it/target/it-repo</it-repo-directory>
   </properties>
 
   <modules>
     <module>tests</module>
+    <module>go-offline</module>
     <module>it</module>
     <module>retrolambda</module>
   </modules>
@@ -49,9 +52,6 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>2.7</version>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -63,7 +63,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.18.1</version>
+          <version>2.19</version>
           <inherited>true</inherited>
           <configuration>
             <failIfNoTests>true</failIfNoTests>
@@ -94,6 +94,11 @@
           <artifactId>maven-invoker-plugin</artifactId>
           <version>1.8</version>
         </plugin>
+        <plugin>
+          <groupId>net.orfjackal.retrolambda</groupId>
+          <artifactId>retrolambda-maven-plugin</artifactId>
+          <version>2.0.6</version>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -101,26 +106,31 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.inco5.slf4j</groupId>
+        <groupId>com.inco5.slf4j.it</groupId>
         <artifactId>tests</artifactId>
         <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>com.inco5.slf4j</groupId>
+        <groupId>com.inco5.slf4j.it</groupId>
         <artifactId>slf4j-compatibility-suite</artifactId>
         <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.8.0-SNAPSHOT</version>
+        <groupId>com.inco5.slf4j.it</groupId>
+        <artifactId>go-offline</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.8.0-SNAPSHOT</version>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
@@ -130,6 +140,46 @@
         <version>4.12</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.surefire</groupId>
+        <artifactId>surefire-junit4</artifactId>
+        <version>2.19</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.5.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <version>1.8</version>
+      </dependency>
+      <dependency>
+        <groupId>net.orfjackal.retrolambda</groupId>
+        <artifactId>retrolambda-maven-plugin</artifactId>
+        <version>2.0.6</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -137,10 +187,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
 </project>

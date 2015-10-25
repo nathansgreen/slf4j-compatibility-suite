@@ -1,6 +1,5 @@
-package com.inco5.slf4j.retrolambda;
+package com.inco5.slf4j.it.retrolambda;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -45,7 +44,7 @@ public class InvokeTest {
     }
 
     @Test
-    @Ignore("currently allowing lambdas to blow up default implementation")
+    // @Ignore("currently allowing lambdas to blow up default implementation")
     public void testThrow() {
         Logger logger = LoggerFactory.getLogger(InvokeTest.class);
         logger.warn("{}", () -> {

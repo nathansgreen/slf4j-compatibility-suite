@@ -4,20 +4,38 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.inco5.slf4j</groupId>
+    <groupId>com.inco5.slf4j.it</groupId>
     <artifactId>slf4j-compatibility-suite</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>retrolambda</artifactId>
   <packaging>jar</packaging>
-  <name>SLF4J Compatibility Unit Tests</name>
+  <name>SLF4J Retrolambda Tests</name>
 
   <description>
     Test use of Retrolambda on consumers of SLF4J 1.8 API
   </description>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j-simple-17.version}</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-install-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
