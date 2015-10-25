@@ -1,6 +1,5 @@
-package com.inco5.slf4j.retrolambda;
+package com.inco5.slf4j.it.retrolambda;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

@@ -4,11 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.inco5.slf4j</groupId>
+    <groupId>com.inco5.slf4j.it</groupId>
     <artifactId>it</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.inco5.slf4j.it</groupId>
   <artifactId>slf4j-simple-16</artifactId>
   <packaging>jar</packaging>
 
@@ -16,7 +15,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.6.6</version>
+      <version>${slf4j-simple-16.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -28,7 +27,7 @@
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <groupId>com.inco5.slf4j</groupId>
+      <groupId>com.inco5.slf4j.it</groupId>
       <artifactId>tests</artifactId>
     </dependency>
   </dependencies>
@@ -41,7 +40,7 @@
           <failIfNoTests>true</failIfNoTests>
           <dependenciesToScan>
             <dependency>org.slf4j:slf4j-api</dependency>
-            <dependency>com.inco5.slf4j:tests</dependency>
+            <dependency>com.inco5.slf4j.it:tests</dependency>
           </dependenciesToScan>
           <excludes>
             <exclude>**org/slf4j/NoBindingTest**</exclude>

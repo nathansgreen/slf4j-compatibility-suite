@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.inco5.slf4j</groupId>
+    <groupId>com.inco5.slf4j.it</groupId>
     <artifactId>slf4j-compatibility-suite</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
@@ -18,9 +18,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.inco5.slf4j</groupId>
+      <groupId>com.inco5.slf4j.it</groupId>
       <artifactId>go-offline</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -28,7 +27,7 @@
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <groupId>com.inco5.slf4j</groupId>
+      <groupId>com.inco5.slf4j.it</groupId>
       <artifactId>tests</artifactId>
     </dependency>
     <dependency>
@@ -73,17 +72,6 @@
               <goal>tree</goal>
             </goals>
           </execution>
-          <!--<execution>-->
-            <!--<goals>-->
-              <!--<goal>copy-dependencies</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-              <!--<useRepositoryLayout>true</useRepositoryLayout>-->
-              <!--<outputDirectory>${project.build.directory}/it-repo</outputDirectory>-->
-              <!--<copyPom>true</copyPom>-->
-              <!--<addParentPoms>true</addParentPoms>-->
-            <!--</configuration>-->
-          <!--</execution>-->
         </executions>
       </plugin>
       <plugin>
@@ -92,14 +80,14 @@
           <cloneProjectsTo>${project.build.directory}</cloneProjectsTo>
           <showErrors>true</showErrors>
           <ignoreFailures>false</ignoreFailures>
-          <!--<localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>-->
+          <!--<localRepositoryPath>${it-repo-directory}</localRepositoryPath>-->
         </configuration>
         <executions>
-          <!--<execution>-->
-            <!--<goals>-->
-              <!--<goal>install</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
+          <execution>
+            <goals>
+              <goal>install</goal>
+            </goals>
+          </execution>
           <execution>
             <id>integration-test</id>
             <goals>
