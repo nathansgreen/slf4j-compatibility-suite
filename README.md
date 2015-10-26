@@ -1,19 +1,32 @@
 # slf4j-compatibility-suite
 
-Ensure slf4j-api retains source and binary compatibility.
+Ensure `slf4j-api` retains source and binary compatibility with the
+addition of Java 8 lambda support.
 
-Tested against:
+Tested against (so far):
 
 * slf4j-simple 1.7.12
 * slf4j-simple 1.6.6
 * Logback 1.0.1
 
-Should not pollute any maven repository.
+No artifacts from this suite should end up in a user's local repository,
+so long as the `install` command is not given to Maven.
 
 ## Running
 
+The best way to run a build is as follows:
+
 ```sh
-    mvn clean verify
+mvn clean verify -Dit-repo-directory=`pwd`/it/target/it-repo
+```
+
+This will cause all dependencies required by the integration tests to be
+copied into the `it/target/it-repo` directory, ensuring isolation from the
+local repository. The default execution works, but will write to a temp
+directory which may not be cleaned up in a timely fashion. Example:
+
+```sh
+mvn clean verify
 ```
 
 ## Compatibility notes
@@ -23,7 +36,7 @@ with the exception of direct use of the `null` keyword for arguments.
 Example:
 
 ```java
-    logger.info("message", null);
+logger.info("message", null);
 ```
 
 Direct use of the `null` keyword is not source-compatible due to overloading

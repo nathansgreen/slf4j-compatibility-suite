@@ -18,10 +18,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.inco5.slf4j.it</groupId>
-      <artifactId>go-offline</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <type>test-jar</type>
@@ -34,30 +30,6 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-dependency-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-resources-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-compiler-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-install-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-invoker-plugin</artifactId>
     </dependency>
   </dependencies>
 
@@ -80,13 +52,42 @@
           <cloneProjectsTo>${project.build.directory}</cloneProjectsTo>
           <showErrors>true</showErrors>
           <ignoreFailures>false</ignoreFailures>
-          <!--<localRepositoryPath>${it-repo-directory}</localRepositoryPath>-->
+          <localRepositoryPath>${it-repo-directory}</localRepositoryPath>
         </configuration>
         <executions>
           <execution>
             <goals>
               <goal>install</goal>
             </goals>
+            <configuration>
+              <extraArtifacts>
+                <!-- manually resolve dependencies that Maven can't figure out until it's too late -->
+                <artifact>org.apache.maven.plugins:maven-dependency-plugin:${maven-dependency-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-clean-plugin:${maven-clean-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-resources-plugin:${maven-resources-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-compiler-plugin:${maven-compiler-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-surefire-plugin:${maven-surefire-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-jar-plugin:${maven-jar-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-install-plugin:${maven-install-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-deploy-plugin:${maven-deploy-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-invoker-plugin:${maven-invoker-plugin.version}:maven-plugin</artifact>
+                <artifact>org.apache.maven.plugins:maven-site-plugin:${maven-site-plugin.version}:maven-plugin</artifact>
+                <artifact>junit:junit:4.0</artifact>
+                <artifact>org.apache.maven.surefire:surefire-junit4:${maven-surefire-plugin.version}</artifact>
+                <artifact>org.codehaus.plexus:plexus-interpolation:1.21:jar</artifact>
+                <artifact>org.apache.maven:maven:2.2.1:pom</artifact>
+                <artifact>junit:junit:4.12:jar</artifact>
+                <artifact>org.slf4j:slf4j-api:${slf4j.version}:test-jar</artifact>
+                <artifact>org.apache.maven.doxia:doxia-sink-api:1.1</artifact>
+                <artifact>org.codehaus.plexus:plexus-utils:3.0.15</artifact>
+                <artifact>org.apache.maven.shared:maven-shared-utils:0.3</artifact>
+                <artifact>org.codehaus.plexus:plexus-interpolation:1.19</artifact>
+                <artifact>org.codehaus.plexus:plexus-utils:1.5.15</artifact>
+                <artifact>org.codehaus.plexus:plexus-container-default:1.5.5</artifact>
+                <artifact>org.apache.maven.wagon:wagon-provider-api:1.0-alpha-6</artifact>
+                <artifact>org.apache.maven.reporting:maven-reporting-api:2.2.1</artifact>
+              </extraArtifacts>
+            </configuration>
           </execution>
           <execution>
             <id>integration-test</id>
